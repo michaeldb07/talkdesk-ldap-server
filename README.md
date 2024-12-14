@@ -1,7 +1,7 @@
 # Talkdesk LDAP Directory Sync
 
 ## Overview
-Service that synchronizes phone directory information between Talkdesk and LDAP, maintaining friendly names and phone numbers in a centralized directory.
+Service that synchronizes phone numbers and their friendly name between Talkdesk and LDAP. As Talkdesk is a CCaaS solution Agent do not typically have assigned phone numbers but are assigned to Studio flows and then routing assignments to Agents occur within a studio flow via conditional statments or the use of functions with case statements. This service requires the phone number to have a friendly name. The removal of a friendly name and use of the sync API endpoint would remove the phone number entry from LDAP directory.
 
 ## System Architecture
 ### Components
@@ -39,22 +39,30 @@ Service that synchronizes phone directory information between Talkdesk and LDAP,
 ```bash
 git clone [repository-url]
 cd talkdesk-ldap-directory
+```
 
 2. Install dependencies:
+```bash
 npm install
+```
 
 3. Configure environment variables:
 Create a .env file with the following variables:
+```bash
 PORT=3000
 LDAP_URL=ldap://localhost:389
 LDAP_BIND_DN=cn=admin,dc=local,dc=dev
 LDAP_BIND_PASSWORD=admin
 TALKDESK_CLIENT_ID=your-client-id
 TALKDESK_CLIENT_SECRET=your-client-secret
+```
 
 4. Initialize LDAP directory:
+```bash
 node  src/setup/init-ldap.js
+```
 
 5. Start the server:
+```bash
 node src/server.js
-
+```
