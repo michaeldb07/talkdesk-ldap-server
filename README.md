@@ -67,4 +67,4 @@ node  src/setup/init-ldap.js
 node src/server.js
 ```
 
-## Michael Brown - Principal Solution Architect
+### Michael Brown - Principal Solution Architect
