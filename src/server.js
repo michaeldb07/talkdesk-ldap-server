@@ -2,8 +2,16 @@ const express = require('express');
 require('dotenv').config();
 const apiRoutes = require('./routes/api');
 const phoneRoutes = require('./routes/phoneRoutes');
+const ldap = require('ldapjs');
 
 const port = process.env.PORT || 3000;
+
+// Create LDAP server
+const ldapServer = ldap.createServer();
+
+ldapServer.listen(389, '0.0.0.0', () => {
+  console.log('LDAP server listening at ldap://0.0.0.0:389');
+});
 
 const app = express();
 app.use(express.json());

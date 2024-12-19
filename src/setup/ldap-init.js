@@ -2,13 +2,16 @@ require('dotenv').config();
 const ldap = require('ldapjs');
 
 async function setupLDAP() {
+    // Add delay to ensure server is ready
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
     console.log('Using LDAP configuration:', {
         url: process.env.LDAP_URL,
         bindDN: process.env.LDAP_BIND_DN
     });
 
     const client = ldap.createClient({
-        url: process.env.LDAP_URL
+        url: process.env.LDAP_URL || 'ldap://0.0.0.0:389'
     });
 
     const entry = {
@@ -34,3 +37,4 @@ async function setupLDAP() {
 }
 
 setupLDAP();
+
